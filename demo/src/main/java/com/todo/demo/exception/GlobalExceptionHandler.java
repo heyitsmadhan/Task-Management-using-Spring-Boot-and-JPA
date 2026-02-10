@@ -28,4 +28,14 @@ public class GlobalExceptionHandler {
         apiError.setUri(request.getRequestURI());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
     }
+
+    @ExceptionHandler(TaskAlreadyExistsException.class)
+    public ResponseEntity<ApiError>taskIdNotExistsException(TaskAlreadyExistsException ex,HttpServletRequest request)
+    {
+        ApiError apiError= new ApiError();
+        apiError.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        apiError.setErrorMsg(ex.getMessage());
+        apiError.setUri(request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
+    }
 }
